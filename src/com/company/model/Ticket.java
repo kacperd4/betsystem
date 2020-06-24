@@ -1,6 +1,5 @@
-package com.company;
+package com.company.model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Ticket {
@@ -8,9 +7,9 @@ public class Ticket {
     private final String user;
     private final List<Bet> bets;
 
-    public Ticket(String user ) {
+    public Ticket(final String user, final List<Bet> bets) {
         this.user = user;
-        bets = new ArrayList<>();
+        this.bets = bets;
     }
 
     public String getUser() {
@@ -19,9 +18,5 @@ public class Ticket {
 
     public List<Bet> getBets() {
         return bets;
-    }
-
-    public void addBet(Bet newBet) {
-        bets.add(newBet);
     }
 }
