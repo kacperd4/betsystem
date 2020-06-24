@@ -2,8 +2,11 @@ package com.company;
 
 import com.company.model.Bet;
 import com.company.model.Offer;
+import com.company.model.Winner;
 import com.company.services.BetService;
 
+import javax.swing.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -14,10 +17,20 @@ public class Main {
         Offer offer2 = new Offer(2L, "lech poznań", "legia warszawa", 2.54f);
         BetService betService = new BetService(List.of(offer1, offer2));
 
-        String user = "mati";
-        Bet bet = new Bet(1L, "TEAM_A", 3f);
+        List<Bet> bets = new ArrayList<>();
+        String user = JOptionPane.showInputDialog("first name");
+        String offerId;
+        do {
 
-        betService.bet(user, List.of(bet));
+            offerId = JOptionPane.showInputDialog("offer");
+            String winner = JOptionPane.showInputDialog("winner");
+            String cost = JOptionPane.showInputDialog("cost");
+
+            Bet bet = new Bet(Long.parseLong(offerId), winner, Float.parseFloat(cost));
+            bets.add(bet);
+        } while (!offerId.equals("0"));
+
+        betService.bet(user, bets);
 
         Map<String, Double> results = betService.simulate();
 
